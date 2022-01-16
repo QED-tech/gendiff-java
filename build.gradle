@@ -1,15 +1,30 @@
+
+
 plugins {
     id 'com.github.ben-manes.versions' version '0.39.0'
     id 'application'
+    id 'checkstyle'
 }
 
 application {
     mainClass = 'hexlet.code.App'
 }
 
+repositories {
+    mavenCentral()
+}
+
 compileJava {
     options.release = 16
 }
 
+run {
+    standardInput = System.in
+}
+
 group = 'hexlet.code'
 version = '1.0-SNAPSHOT'
+
+checkstyle {
+    toolVersion '9.2.1'
+}
