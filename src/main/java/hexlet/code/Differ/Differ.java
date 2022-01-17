@@ -13,7 +13,7 @@ public class Differ {
         String contentFirstFile = Files.readString(new File(firstFilePath).toPath());
         String contentSecondFile = Files.readString(new File(secondFilePath).toPath());
 
-        return Differ.getDiff(
+        return Differ.makeDiff(
                 Differ.getData(contentFirstFile),
                 Differ.getData(contentSecondFile)
         );
@@ -24,7 +24,7 @@ public class Differ {
         return objectMapper.readValue(content, TreeMap.class);
     }
 
-    private static String getDiff(Map firstMap, Map secondMap) {
+    private static String makeDiff(Map firstMap, Map secondMap) {
         return "result";
     }
 
