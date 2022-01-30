@@ -7,6 +7,11 @@ import java.util.TreeMap;
 
 public class JsonParser implements FileParser {
 
+    /**
+     * @param content String
+     * @return Map
+     * @throws Exception
+     */
     @Override
     public Map parse(String content) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();

@@ -5,6 +5,9 @@ import java.util.TreeMap;
 
 public class Diff extends TreeMap {
 
+    /**
+     * @return String
+     */
     public String toString() {
         StringBuilder diffView = new StringBuilder();
         var keys = this.keySet();
