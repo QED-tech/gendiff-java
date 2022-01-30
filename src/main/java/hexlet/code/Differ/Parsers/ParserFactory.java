@@ -12,6 +12,10 @@ public class ParserFactory {
             return new JsonParser();
         }
 
+        if ("yml".equals(extension)) {
+            return new YmlParser();
+        }
+
         throw new RuntimeException(String.format("extension - %s is not support", extension));
     }
 

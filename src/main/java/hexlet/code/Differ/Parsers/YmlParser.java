@@ -1,6 +1,10 @@
 package hexlet.code.Differ.Parsers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+
 import java.util.Map;
+import java.util.TreeMap;
 
 public class YmlParser implements FileParser {
 
@@ -11,6 +15,7 @@ public class YmlParser implements FileParser {
      */
     @Override
     public Map parse(String content) throws Exception {
-        return null;
+        ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
+        return objectMapper.readValue(content, TreeMap.class);
     }
 }
