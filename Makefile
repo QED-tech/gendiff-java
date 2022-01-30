@@ -19,4 +19,9 @@ build:
 run:
 	./build/install/app/bin/app ~/projects/java/java-project-lvl2/src/test/resources/json/flat/file1.json ~/projects/java/java-project-lvl2/src/test/resources/json/flat/file2.json
 
+test:
+	./gradlew test
+
 re-run: install run
+
+.PHONY: build
