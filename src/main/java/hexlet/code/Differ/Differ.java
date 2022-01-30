@@ -22,7 +22,7 @@ public class Differ {
     }
 
     private static String diffToString(Map diff) {
-        String diffView = "";
+        StringBuilder diffView = new StringBuilder();
         var keys = diff.keySet();
         var iterator = keys.iterator();
 
@@ -32,27 +32,27 @@ public class Differ {
 
             switch ((String) metaInfo.get("reason")) {
                 case "equals" -> {
-                    diffView += String.format("  %s: %s%n", key, metaInfo.get("value"));
+                    diffView.append(String.format("  %s: %s%n", key, metaInfo.get("value")));
                     continue;
                 }
 
                 case "deleted" -> {
-                    diffView += String.format("- %s: %s%n", key, metaInfo.get("value"));
+                    diffView.append(String.format("- %s: %s%n", key, metaInfo.get("value")));
                     continue;
                 }
 
                 case "changed" -> {
-                    diffView += String.format("- %s: %s%n", key, metaInfo.get("old_value"));
-                    diffView += String.format("+ %s: %s%n", key, metaInfo.get("new_value"));
+                    diffView.append(String.format("- %s: %s%n", key, metaInfo.get("old_value")));
+                    diffView.append(String.format("+ %s: %s%n", key, metaInfo.get("new_value")));
                     continue;
                 }
             }
 
 
-            diffView += String.format("+ %s: %s%n", key, metaInfo.get("value"));
+            diffView.append(String.format("+ %s: %s%n", key, metaInfo.get("value")));
         } while (iterator.hasNext());
 
-        return String.format("{%n%s}", diffView);
+        return String.format("{%n%s}", diffView.toString());
     }
 
     private static Map makeDiff(Map firstMap, Map secondMap) {
