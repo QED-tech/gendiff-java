@@ -32,24 +32,24 @@ public class Differ {
 
             switch ((String) metaInfo.get("reason")) {
                 case "equals" -> {
-                    diffView.append(String.format("  %s: %s%n", key, metaInfo.get("value")));
+                    diffView.append(String.format("    %s: %s%n", key, metaInfo.get("value")));
                     continue;
                 }
 
                 case "deleted" -> {
-                    diffView.append(String.format("- %s: %s%n", key, metaInfo.get("value")));
+                    diffView.append(String.format("  - %s: %s%n", key, metaInfo.get("value")));
                     continue;
                 }
 
                 case "changed" -> {
-                    diffView.append(String.format("- %s: %s%n", key, metaInfo.get("old_value")));
-                    diffView.append(String.format("+ %s: %s%n", key, metaInfo.get("new_value")));
+                    diffView.append(String.format("  - %s: %s%n", key, metaInfo.get("old_value")));
+                    diffView.append(String.format("  + %s: %s%n", key, metaInfo.get("new_value")));
                     continue;
                 }
             }
 
 
-            diffView.append(String.format("+ %s: %s%n", key, metaInfo.get("value")));
+            diffView.append(String.format("  + %s: %s%n", key, metaInfo.get("value")));
         } while (iterator.hasNext());
 
         return String.format("{%n%s}", diffView.toString());
