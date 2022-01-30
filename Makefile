@@ -14,7 +14,7 @@ clean:
 	./gradlew clean
 
 build:
-	make lint && ./gradlew clean build
+	./gradlew clean build
 
 run:
 	./build/install/app/bin/app ~/projects/java/java-project-lvl2/src/test/resources/json/flat/file1.json ~/projects/java/java-project-lvl2/src/test/resources/json/flat/file2.json
