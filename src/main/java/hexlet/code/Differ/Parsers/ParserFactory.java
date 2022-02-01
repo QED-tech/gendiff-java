@@ -5,18 +5,19 @@ import java.io.File;
 public class ParserFactory {
 
     public static FileParser create(File file) {
-
         String extension = ParserFactory.getFileExtension(file);
 
-        if ("json".equals(extension)) {
-            return new JsonParser();
-        }
+        switch (extension) {
+            case "json" -> {
+                return new JsonParser();
+            }
 
-        if ("yml".equals(extension)) {
-            return new YmlParser();
-        }
+            case "yml" -> {
+                return new YmlParser();
+            }
 
-        throw new RuntimeException(String.format("extension - %s is not support", extension));
+            default -> throw new RuntimeException(String.format("extension - %s is not support", extension));
+        }
     }
 
     private static String getFileExtension(File file) {
