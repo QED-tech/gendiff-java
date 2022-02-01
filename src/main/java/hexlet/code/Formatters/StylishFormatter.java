@@ -1,30 +1,23 @@
-package hexlet.code.Differ;
+package hexlet.code.Formatters;
+
+import hexlet.code.Diff;
 
 import java.util.HashMap;
-import java.util.TreeMap;
 
-public class Diff extends TreeMap {
-
+public class StylishFormatter implements Formatter {
     /**
-     * @return String
-     * @param format String
+     * @param diff Diff
+     * @return
      */
-    public String toFormat(String format) {
-        if (format.equals("stylish")) {
-            return this.makeStylishFormat();
-        }
-
-        return "";
-    }
-
-    private String makeStylishFormat() {
+    @Override
+    public String format(Diff diff) {
         StringBuilder diffView = new StringBuilder();
-        var keys = this.keySet();
+        var keys = diff.keySet();
         var iterator = keys.iterator();
 
         do {
             var key = iterator.next();
-            HashMap metaInfo = (HashMap) this.get(key);
+            HashMap metaInfo = (HashMap) diff.get(key);
 
             switch ((String) metaInfo.get("reason")) {
                 case "equals" -> diffView.append(String.format("    %s: %s%n", key, metaInfo.get("value")));

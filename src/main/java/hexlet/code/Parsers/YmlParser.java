@@ -1,4 +1,4 @@
-package hexlet.code.Differ.Parsers;
+package hexlet.code.Parsers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;

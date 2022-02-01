@@ -1,17 +1,20 @@
-package hexlet.code.Differ;
+package hexlet.code;
 
-import hexlet.code.Differ.Parsers.FileParser;
-import hexlet.code.Differ.Parsers.ParserFactory;
+import hexlet.code.Parsers.FileParser;
+import hexlet.code.Parsers.ParserFactory;
 
 import java.io.File;
 import java.nio.file.Files;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Differ {
 
-    public static String generate(String firstFilePath, String secondFilePath, String format) throws Exception {
-        File firstFile = new File(firstFilePath);
-        File secondFile = new File(secondFilePath);
+    public static String generate(String filePath1, String filePath2, String formatName) throws Exception {
+        File firstFile = new File(filePath1);
+        File secondFile = new File(filePath2);
 
         String contentFirstFile = Files.readString(firstFile.toPath());
         String contentSecondFile = Files.readString(secondFile.toPath());
@@ -20,7 +23,11 @@ public class Differ {
 
         return Differ
                 .makeDiff(fileParser.parse(contentFirstFile), fileParser.parse(contentSecondFile))
-                .toFormat(format);
+                .toFormat(formatName);
+    }
+
+    public static String generate(String filePath1, String filePath2) throws Exception {
+        return generate(filePath1, filePath2, "stylish");
     }
 
     private static Diff makeDiff(Map firstMap, Map secondMap) {
