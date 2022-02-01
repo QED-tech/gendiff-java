@@ -52,6 +52,12 @@ public class DifferTest {
                         "src/test/resources/json/nested/file2.json",
                         "src/test/resources/json/nested/result.txt",
                         "stylish"
+                ),
+                arguments(
+                        "src/test/resources/json/nested/file1.json",
+                        "src/test/resources/json/nested/file2.json",
+                        "src/test/resources/json/nested/result-plain-format.txt",
+                        "plain"
                 )
         );
     }
