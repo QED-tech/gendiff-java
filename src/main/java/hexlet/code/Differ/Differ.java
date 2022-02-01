@@ -37,15 +37,14 @@ public class Differ {
 
         do {
             var key = iterator.next();
-            var valueFirst = firstMap.get(key);
-            var valueSecond = secondMap.get(key);
+            var valueFirst = firstMap.get(key) == null ? "null" : firstMap.get(key);
+            var valueSecond = secondMap.get(key) == null ? "null" : secondMap.get(key);
 
             var metaInfo = new HashMap<>();
 
             if (firstMapKeys.contains(key) && secondMapKeys.contains(key) && valueFirst.equals(valueSecond)) {
                 metaInfo.put("value", valueFirst);
                 metaInfo.put("reason", "equals");
-                metaInfo.put("isParent", false);
                 diff.put(key, metaInfo);
                 continue;
             }
@@ -54,7 +53,6 @@ public class Differ {
                 metaInfo.put("old_value", valueFirst);
                 metaInfo.put("new_value", valueSecond);
                 metaInfo.put("reason", "changed");
-                metaInfo.put("isParent", false);
                 diff.put(key, metaInfo);
                 continue;
             }
@@ -62,7 +60,6 @@ public class Differ {
             if (firstMapKeys.contains(key) && !secondMapKeys.contains(key)) {
                 metaInfo.put("value", valueFirst);
                 metaInfo.put("reason", "deleted");
-                metaInfo.put("isParent", false);
                 diff.put(key, metaInfo);
                 continue;
             }
@@ -70,7 +67,6 @@ public class Differ {
 
             metaInfo.put("value", valueSecond);
             metaInfo.put("reason", "added");
-            metaInfo.put("isParent", false);
             diff.put(key, metaInfo);
 
         } while (iterator.hasNext());

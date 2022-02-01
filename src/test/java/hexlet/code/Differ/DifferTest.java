@@ -42,6 +42,11 @@ public class DifferTest {
                         "src/test/resources/yml/flat/file1.yml",
                         "src/test/resources/yml/flat/file2.yml",
                         "src/test/resources/yml/flat/result.txt"
+                ),
+                arguments(
+                        "src/test/resources/json/nested/file1.json",
+                        "src/test/resources/json/nested/file2.json",
+                        "src/test/resources/json/nested/result.txt"
                 )
         );
     }
