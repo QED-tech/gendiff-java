@@ -2,10 +2,13 @@ package hexlet.code.Differ.Formatters;
 
 import hexlet.code.Differ.Diff;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PlainFormatter implements Formatter {
+    /**
+     * @param diff Diff
+     * @return
+     */
     @Override
     public String format(Diff diff) {
         StringBuilder diffView = new StringBuilder();
@@ -24,7 +27,10 @@ public class PlainFormatter implements Formatter {
                         this.normalizeValue(metaInfo.get("old_value")),
                         this.normalizeValue(metaInfo.get("new_value")))
                 );
-                default -> diffView.append(String.format("Property '%s' was added with value: %s", key, this.normalizeValue(metaInfo.get("value"))));
+                default -> diffView.append(
+                        String.format("Property '%s' was added with value: %s", key,
+                        this.normalizeValue(metaInfo.get("value")))
+                );
             }
 
             if (++count < keys.size()) {
