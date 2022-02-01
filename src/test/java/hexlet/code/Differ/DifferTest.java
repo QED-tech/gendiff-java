@@ -17,14 +17,16 @@ public class DifferTest {
      * @param file1 String
      * @param file2 String
      * @param resultFile String
+     * @param format String
      * @throws Exception
      */
     @ParameterizedTest
     @MethodSource("dataProvider")
-    void testDiffer(String file1, String file2, String resultFile) throws Exception {
+    void testDiffer(String file1, String file2, String resultFile, String format) throws Exception {
         var actual = Differ.generate(
                 file1,
-                file2
+                file2,
+                format
         );
         var excepted = Files.readString(new File(resultFile).toPath());
 
@@ -36,17 +38,20 @@ public class DifferTest {
                 arguments(
                         "src/test/resources/json/flat/file1.json",
                         "src/test/resources/json/flat/file2.json",
-                        "src/test/resources/json/flat/result.txt"
+                        "src/test/resources/json/flat/result.txt",
+                        "stylish"
                 ),
                 arguments(
                         "src/test/resources/yml/flat/file1.yml",
                         "src/test/resources/yml/flat/file2.yml",
-                        "src/test/resources/yml/flat/result.txt"
+                        "src/test/resources/yml/flat/result.txt",
+                        "stylish"
                 ),
                 arguments(
                         "src/test/resources/json/nested/file1.json",
                         "src/test/resources/json/nested/file2.json",
-                        "src/test/resources/json/nested/result.txt"
+                        "src/test/resources/json/nested/result.txt",
+                        "stylish"
                 )
         );
     }

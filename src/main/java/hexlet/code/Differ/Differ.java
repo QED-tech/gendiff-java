@@ -9,7 +9,7 @@ import java.util.*;
 
 public class Differ {
 
-    public static String generate(String firstFilePath, String secondFilePath) throws Exception {
+    public static String generate(String firstFilePath, String secondFilePath, String format) throws Exception {
         File firstFile = new File(firstFilePath);
         File secondFile = new File(secondFilePath);
 
@@ -20,7 +20,7 @@ public class Differ {
 
         return Differ
                 .makeDiff(fileParser.parse(contentFirstFile), fileParser.parse(contentSecondFile))
-                .toString();
+                .toFormat(format);
     }
 
     private static Diff makeDiff(Map firstMap, Map secondMap) {

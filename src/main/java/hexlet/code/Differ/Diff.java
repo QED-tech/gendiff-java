@@ -7,8 +7,17 @@ public class Diff extends TreeMap {
 
     /**
      * @return String
+     * @param format String
      */
-    public String toString() {
+    public String toFormat(String format) {
+        if (format.equals("stylish")) {
+            return this.makeStylishFormat();
+        }
+
+        return "";
+    }
+
+    private String makeStylishFormat() {
         StringBuilder diffView = new StringBuilder();
         var keys = this.keySet();
         var iterator = keys.iterator();
