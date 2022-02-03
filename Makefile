@@ -22,6 +22,9 @@ run:
 test:
 	./gradlew test
 
+report:
+	./gradlew jacocoTestReport
+
 re-run: install run
 
 .PHONY: build
