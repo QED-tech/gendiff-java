@@ -47,38 +47,50 @@ public class Differ {
             var valueFirst = firstMap.get(key) == null ? "null" : firstMap.get(key);
             var valueSecond = secondMap.get(key) == null ? "null" : secondMap.get(key);
 
-            var metaInfo = new HashMap<>();
-
             if (firstMapKeys.contains(key) && secondMapKeys.contains(key) && valueFirst.equals(valueSecond)) {
-                metaInfo.put("value", valueFirst);
-                metaInfo.put("reason", "equals");
-                diff.put(key, metaInfo);
+                diff.put(key, Differ.getMetaInfoByState("equals", valueFirst, valueSecond));
                 continue;
             }
 
             if (firstMapKeys.contains(key) && secondMapKeys.contains(key) && !valueFirst.equals(valueSecond)) {
-                metaInfo.put("old_value", valueFirst);
-                metaInfo.put("new_value", valueSecond);
-                metaInfo.put("reason", "changed");
-                diff.put(key, metaInfo);
+                diff.put(key, Differ.getMetaInfoByState("changed", valueFirst, valueSecond));
                 continue;
             }
 
             if (firstMapKeys.contains(key) && !secondMapKeys.contains(key)) {
-                metaInfo.put("value", valueFirst);
-                metaInfo.put("reason", "deleted");
-                diff.put(key, metaInfo);
+                diff.put(key, Differ.getMetaInfoByState("deleted", valueFirst, valueSecond));
                 continue;
             }
 
-
-            metaInfo.put("value", valueSecond);
-            metaInfo.put("reason", "added");
-            diff.put(key, metaInfo);
-
+            diff.put(key, Differ.getMetaInfoByState("added", valueFirst, valueSecond));
         } while (iterator.hasNext());
 
         return diff;
+    }
+
+    private static HashMap getMetaInfoByState(String state, Object valueFromFirstMap, Object valueFromSecondMap) {
+        var metaInfo = new HashMap<>();
+        switch (state) {
+            case "equals", "deleted" -> {
+                metaInfo.put("value", valueFromFirstMap);
+                metaInfo.put("reason", state);
+                return metaInfo;
+            }
+            case "changed" -> {
+                metaInfo.put("old_value", valueFromFirstMap);
+                metaInfo.put("new_value", valueFromSecondMap);
+                metaInfo.put("reason", state);
+                return metaInfo;
+            }
+            case "added" -> {
+                metaInfo.put("value", valueFromSecondMap);
+                metaInfo.put("reason", "added");
+                return metaInfo;
+            }
+            default -> {
+                return metaInfo;
+            }
+        }
     }
 
 }

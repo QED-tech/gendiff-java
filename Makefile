@@ -17,7 +17,7 @@ build:
 	./gradlew clean build
 
 run:
-	./build/install/app/bin/app -f plain ./src/test/resources/json/nested/file1.json ./src/test/resources/json/nested/file2.json
+	./build/install/app/bin/app ./src/test/resources/json/nested/file1.json ./src/test/resources/json/nested/file2.json
 
 test:
 	./gradlew test
